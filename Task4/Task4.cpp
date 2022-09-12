@@ -109,7 +109,7 @@ void* map4(void* arg){
         if(pthread_create(&th[*a], NULL, &sort, a) != 0) {
             perror("Failed to create thread");
         }
-        setScheduling(th[*a], SCHED_RR, prioList[*a]);
+        setPriority(th[*a], SCHED_RR, prioList[*a]);
         int storePolicy;
         sched_param storeParam;
         pthread_getschedparam(th[*a], &storePolicy, &storeParam);
@@ -145,11 +145,11 @@ void* sort(void* arg){
     pthread_exit(arg);
 }
 
-static void setScheduling(pthread_t &th, int policy, int priority) {
+static void setPriority(pthread_t &th, int policy, int priority) {
     sched_param param;
     param.sched_priority = priority;
     if(pthread_setschedparam(th, policy, &param)) {
-        std::cerr << "Failed to set Thread scheduling : " << std::strerror(errno)<< std::endl;
+        std::cerr << "Failed to set priority : " << std::strerror(errno)<< std::endl;
     }
 
 }

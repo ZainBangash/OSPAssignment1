@@ -39,7 +39,7 @@ void* reduce4(void* arg);
 void* sort(void* arg);
 bool compareString(const int &V1, const int &V2);
 void TaskFilter(std::string dirtyFileName);
-static void setScheduling(pthread_t &th, int policy, int priority);
+static void setPriority(pthread_t &th, int policy, int priority);
 
 
 #endif // Task4_H
